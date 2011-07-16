@@ -1,7 +1,9 @@
-Finds words in the letters param
+Finds words in the letters param, limited by length (defaults to 8)
+
+Uses the SOWPODS dictionary (http://en.wikipedia.org/wiki/SOWPODS)
 
 foreman start
 
 curl -F letters=abcdrefg http://localhost:5000/find
 
-
+curl -F letters=ace -F length=2 http://localhost:5000/find
