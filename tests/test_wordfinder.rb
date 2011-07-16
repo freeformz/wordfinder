@@ -14,7 +14,7 @@ class WordFinderTest < MiniTest::Unit::TestCase
   def test_it_says_words
     get '/'
     assert last_response.ok?
-    assert_equal "Words!\n", last_response.body
+    assert_match "Find Words!", last_response.body
   end
 
   def test_it_returns_500

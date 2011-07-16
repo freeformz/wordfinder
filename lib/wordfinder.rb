@@ -39,7 +39,9 @@ end
 
 get '/' do
   <<EOF
-Words!
+Find Words!
+
+#{File.read(File.dirname(__FILE__) + "/../README")}
 EOF
 end
 
