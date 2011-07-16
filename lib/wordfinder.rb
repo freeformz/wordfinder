@@ -38,11 +38,8 @@ def find_words(words, search_letters, max_word_length)
 end
 
 get '/' do
-  <<EOF
-Find Words!
-
-#{File.read(File.dirname(__FILE__) + "/../README")}
-EOF
+  content_type 'text/plain'
+  File.read(File.dirname(__FILE__) + "/../README")
 end
 
 post "/find" do
