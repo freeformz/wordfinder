@@ -38,7 +38,9 @@ def find_words(words, search_letters, max_word_length)
 end
 
 get '/' do
-  "Words!"
+  <<EOF
+Words!
+EOF
 end
 
 post "/find" do
