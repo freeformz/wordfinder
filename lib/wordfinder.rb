@@ -6,11 +6,12 @@ WORDS = File.open("#{File.dirname(__FILE__)}/../words/sowpods.txt",'r') { |f| f.
 
 # Finds words
 #
-# @param [Array] search_letters An array of letters to search
+# @param [Array] words capitalized words array
+# @param [Array] search_letters an array of capitalized letters to search
 # @param [Fixnum] max_word_length the maximum word length to return
 #
 # Brute Force FTL
-def find_words(words, search_letters, max_word_length = 8)
+def find_words(words, search_letters, max_word_length)
   words.select do |word| 
     if word.length > max_word_length
       false
@@ -36,5 +37,6 @@ post "/find" do
   unless letters = params[:letters]
     halt 500, "Letters Missing"
   end
-  find_words(WORDS, letters.chars.map(&:upcase)).to_json
+  length = params[:length] ? params[:length].to_i : 8
+  find_words(WORDS, letters.chars.map(&:upcase), length).to_json
 end

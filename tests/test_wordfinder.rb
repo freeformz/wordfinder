@@ -28,4 +28,11 @@ class WordFinderTest < MiniTest::Unit::TestCase
     assert last_response.ok?
     assert_equal last_response.body, "[\"AE\",\"AM\",\"EA\",\"ME\",\"MA\",\"EM\",\"MAE\"]"
   end
+
+  def test_finding_and_length
+    post '/find', :letters => 'ame', :length => 2
+    assert last_response.ok?
+    assert_equal last_response.body, "[\"AE\",\"AM\",\"EA\",\"EM\",\"MA\",\"ME\"]", last_response.body.inspect
+  end
+
 end
