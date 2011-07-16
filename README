@@ -1,0 +1,7 @@
+Finds words in the letters param
+
+foreman start
+
+curl -F letters=abcdrefg http://localhost:5000/find
+
+
