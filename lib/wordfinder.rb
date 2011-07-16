@@ -4,27 +4,35 @@ require 'json'
 
 WORDS = File.open("#{File.dirname(__FILE__)}/../words/sowpods.txt",'r') { |f| f.read.split("\r\n") }
 
-# Finds words
+# Is the word contained in the letters?
 #
-# @param [Array] words capitalized words array
+# @param [String] word The word to check for
+# @param [Array] letters capitalized letters to search
+#
+# Brute Force FTL
+def word_contained_in_letters?(word, letters)
+  word.chars.all? do |char|
+    if pos = letters.index(char)
+      letters.delete_at(pos)
+      true
+    else
+      false
+    end
+  end
+end
+
+# Finds words in the search_letters from a dictionary
+#
+# @param [Array] words capitalized words array. The dictionary
 # @param [Array] search_letters an array of capitalized letters to search
 # @param [Fixnum] max_word_length the maximum word length to return
 #
-# Brute Force FTL
 def find_words(words, search_letters, max_word_length)
   words.select do |word| 
     if word.length > max_word_length
       false
     else
-      letters = search_letters.clone
-      word.chars.all? do |char|
-        if pos = letters.index(char)
-          letters.delete_at(pos)
-          true
-        else
-          false
-        end
-      end
+      word_contained_in_letters?(word, search_letters.clone)
     end
   end.flatten.compact.sort {|a,b| a.length <=> b.length }
 end
